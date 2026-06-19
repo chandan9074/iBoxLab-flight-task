@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { BookingFlow } from "@/features/booking/BookingFlow";
+import { BookingFlow } from "@/features/booking/components/BookingFlow";
 import { getFlightById } from "@/lib/flights-service";
 import { todayISO } from "@/lib/date";
 import { MAX_PASSENGERS, MIN_PASSENGERS } from "@/lib/search-params";

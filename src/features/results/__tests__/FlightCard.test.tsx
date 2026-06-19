@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { FlightCard } from "../FlightCard";
+import { FlightCard } from "../components/FlightCard";
 import type { Flight } from "@/lib/types";
 
 const flight: Flight = {

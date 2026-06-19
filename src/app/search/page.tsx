@@ -1,8 +1,8 @@
 import { Suspense } from "react";
 import Link from "next/link";
 import { Button } from "antd";
-import { ResultsView } from "@/features/results/ResultsView";
-import { LoadingState } from "@/features/results/ResultStates";
+import { ResultsView } from "@/features/results/components/ResultsView";
+import { LoadingState } from "@/features/results/components/ResultStates";
 
 export default async function SearchPage({
   searchParams,

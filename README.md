@@ -79,11 +79,16 @@ src/
 │  ├─ providers.tsx          Ant Design theme provider
 │  └─ layout.tsx             Root layout (header, footer)
 ├─ components/               Shared presentational components
-├─ features/
-│  ├─ search/                Search form
-│  ├─ results/               Results list, filters, sort, state views
-│  └─ booking/               Review, passenger form, confirmation
-├─ lib/                      Framework-agnostic logic + types
+├─ features/                 Each feature groups its own components/hooks/tests
+│  ├─ search/
+│  │  └─ SearchForm.tsx      Single component — kept flat
+│  ├─ results/
+│  │  ├─ components/         Results list, filters, sort, state views
+│  │  ├─ hooks/              useFlightSearch, useResultsControls
+│  │  └─ __tests__/          Component tests for this feature
+│  └─ booking/
+│     └─ components/         Review, passenger form, confirmation
+├─ lib/                      Framework-agnostic logic + types (flat module folder)
 └─ data/                     Mock dataset
 ```
 

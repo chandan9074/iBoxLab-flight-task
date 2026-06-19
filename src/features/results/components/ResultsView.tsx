@@ -14,8 +14,8 @@ import { FiltersPanel } from "./FiltersPanel";
 import { ResultsHeader } from "./ResultsHeader";
 import { SortControl } from "./SortControl";
 import { EmptyState, ErrorState, LoadingState } from "./ResultStates";
-import { useFlightSearch } from "./useFlightSearch";
-import { useResultsControls } from "./useResultsControls";
+import { useFlightSearch } from "../hooks/useFlightSearch";
+import { useResultsControls } from "../hooks/useResultsControls";
 
 type View = "cards" | "table";
 

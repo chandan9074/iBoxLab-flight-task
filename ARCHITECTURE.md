@@ -27,6 +27,25 @@ app/         Routes that compose features
 The dependency direction is one-way: `app` and `features` depend on `lib`,
 never the reverse.
 
+### Inside a feature
+
+A feature folder groups its own pieces so each kind of file has an obvious
+home, and a feature can be read (or moved) as a self-contained unit:
+
+```
+features/results/
+  components/   UI components (FlightCard, FiltersPanel, ResultsView, …)
+  hooks/        Stateful logic (useFlightSearch, useResultsControls)
+  __tests__/    Tests for this feature
+```
+
+The rule is **fold by kind once there's more than one file of that kind** —
+`results` has many components and two hooks, so both get a folder; `booking`
+has several components and no hooks, so it has only `components/`; `search` is a
+single component and stays flat (a folder for one file just adds nesting). `lib`
+stays flat for the same reason — it's a set of small, peer utility modules, not
+a hierarchy.
+
 ## State management
 
 The brief asks for a deliberate state strategy. Rather than reach for a single
