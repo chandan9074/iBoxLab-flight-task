@@ -1,36 +1,100 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Flight Search Aggregator
 
-## Getting Started
+A flight search and booking experience built with **Next.js 16 (App Router)**, **React 19**, **TypeScript**, **Ant Design 6**, and **Tailwind CSS v4**.
 
-First, run the development server:
+Users search for flights, filter and sort the results, select a flight, review it, and complete a booking — with loading, empty, and error states handled throughout.
+
+> Mock data only. No real backend, no real payments.
+
+## Features
+
+- **Search** by origin, destination, date, and passenger count, with client-side validation.
+- **Results** shown as cards or an Ant Design table (user-toggleable), fully responsive.
+- **Sort** by price, duration, departure, or arrival.
+- **Filter** by airline, stops, cabin class, and max price.
+- **State handling** for loading (skeletons), empty (no matches), and error (with retry) conditions.
+- **Booking flow** with a stepper: review → passenger details → confirmation.
+- **Validation & feedback** on the booking form (contact, passengers, and a mock payment section).
+- **Booking confirmation** with a reference number and printable summary.
+
+## Tech stack
+
+| Concern | Choice |
+| --- | --- |
+| Framework | Next.js 16 (App Router) |
+| UI library | React 19 |
+| Language | TypeScript (strict) |
+| Components | Ant Design 6 |
+| Styling / layout | Tailwind CSS v4 |
+| Icons | Ant Design Icons + lucide-react |
+| Testing | Jest + React Testing Library |
+
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000 (or the port shown in the terminal).
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Start the dev server |
+| `npm run build` | Production build |
+| `npm run start` | Run the production build |
+| `npm run lint` | Lint with ESLint |
+| `npm run test` | Run the test suite once |
+| `npm run test:watch` | Run tests in watch mode |
 
-## Learn More
+## Mock API
 
-To learn more about Next.js, take a look at the following resources:
+The app talks to a mock REST endpoint implemented as a Next.js Route Handler at
+[`src/app/api/flights/route.ts`](src/app/api/flights/route.ts). It reads from a
+static dataset ([`src/data/flights.json`](src/data/flights.json), 56 flights
+across three routes) and supports:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+GET /api/flights?origin=JFK&destination=LAX&date=2026-07-20&passengers=2
+    &airlines=AA,DL&stops=0&maxPrice=400&cabinClasses=economy
+    &sortBy=price&sortDir=asc
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Validates the query and returns **400** with field-level errors for bad input.
+- Returns **filtered + sorted** flights plus **facets** (available airlines, stops, cabins, price range) for the route.
+- Adds a small artificial delay so loading states are visible.
+- `&simulate=error` returns **503** to demonstrate the error state.
 
-## Deploy on Vercel
+## Project structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+src/
+├─ app/                      Routes (App Router)
+│  ├─ page.tsx               Home — hero + search form
+│  ├─ search/page.tsx        Results page
+│  ├─ booking/[flightId]/    Booking flow + not-found
+│  ├─ api/flights/route.ts   Mock API
+│  ├─ providers.tsx          Ant Design theme provider
+│  └─ layout.tsx             Root layout (header, footer)
+├─ components/               Shared presentational components
+├─ features/
+│  ├─ search/                Search form
+│  ├─ results/               Results list, filters, sort, state views
+│  └─ booking/               Review, passenger form, confirmation
+├─ lib/                      Framework-agnostic logic + types
+└─ data/                     Mock dataset
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See [ARCHITECTURE.md](ARCHITECTURE.md) for the design decisions behind this structure.
+
+## Testing
+
+Tests use Jest and React Testing Library. Pure logic (filtering, sorting,
+validation, pricing) is unit-tested; key UI behavior (flight cards, result
+states) is tested with RTL.
+
+```bash
+npm run test
+```
