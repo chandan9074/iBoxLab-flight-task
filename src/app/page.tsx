@@ -1,4 +1,5 @@
 import { ShieldCheck, Sparkles, Wallet } from "lucide-react";
+import { HeroBackground } from "@/components/HeroBackground";
 import { SearchForm } from "@/features/search/SearchForm";
 import { todayISO } from "@/lib/date";
 
@@ -25,11 +26,8 @@ export default function Home() {
 
   return (
     <main className="flex-1">
-      <section className="relative overflow-hidden bg-gradient-to-br from-brand-700 via-brand-600 to-brand-800">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-20 [background:radial-gradient(60rem_30rem_at_70%_-10%,white,transparent)]"
-        />
+      <section className="relative overflow-hidden bg-linear-to-br from-brand-700 via-brand-600 to-brand-800">
+        <HeroBackground />
         <div className="relative mx-auto max-w-6xl px-4 pb-28 pt-16 sm:px-6 sm:pt-24">
           <p className="text-sm font-medium uppercase tracking-wider text-brand-100">
             Find your flight

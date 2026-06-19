@@ -138,7 +138,7 @@ export function PassengerForm({
               <h2 className="text-base font-semibold text-zinc-900">
                 Passenger {index + 1}
               </h2>
-              <Divider className="!mb-4 !mt-3" />
+              <Divider className="mb-4! mt-3!" />
               <div className="grid grid-cols-1 gap-x-4 sm:grid-cols-6">
                 <Form.Item
                   name={["passengers", index, "title"]}

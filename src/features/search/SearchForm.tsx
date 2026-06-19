@@ -77,7 +77,7 @@ export function SearchForm({ today, defaults }: SearchFormProps) {
   }
 
   return (
-    <div className="rounded-2xl bg-white p-5 shadow-xl shadow-brand-950/5 ring-1 ring-zinc-200 sm:p-6">
+    <div className="relative rounded-2xl bg-white p-5 shadow-xl shadow-brand-950/5 ring-1 ring-zinc-200 sm:p-6">
       <Form
         form={form}
         layout="vertical"
