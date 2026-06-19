@@ -13,12 +13,31 @@ export function SiteHeader() {
             SkyFare
           </span>
         </Link>
-        <nav className="flex items-center gap-6 text-sm font-medium text-zinc-600">
-          <Link href="/" className="hover:text-zinc-900">
-            Search
+        <nav className="flex items-center gap-5 text-sm font-medium text-zinc-600 sm:gap-6">
+          <Link
+            href="/"
+            className="hidden transition-colors hover:text-zinc-900 sm:inline"
+          >
+            Flights
           </Link>
-          <span className="hidden text-zinc-300 sm:inline">|</span>
-          <span className="hidden sm:inline">Demo · iBoxLab Assignment</span>
+          <Link
+            href="/"
+            className="hidden transition-colors hover:text-zinc-900 sm:inline"
+          >
+            Deals
+          </Link>
+          <Link
+            href="/"
+            className="hidden transition-colors hover:text-zinc-900 sm:inline"
+          >
+            Help
+          </Link>
+          <Link
+            href="/"
+            className="rounded-lg bg-brand-600 px-3.5 py-1.5 font-semibold text-white transition-colors hover:bg-brand-700"
+          >
+            Sign in
+          </Link>
         </nav>
       </div>
     </header>
