@@ -125,7 +125,7 @@ export function PassengerForm({
                   },
                 ]}
               >
-                <Input size="large" placeholder="+1 555 123 4567" />
+                <Input size="large" placeholder="01XXXXXXXXX" />
               </Form.Item>
             </div>
           </section>

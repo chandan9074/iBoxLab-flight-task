@@ -23,7 +23,7 @@ export function EmptyState({ onReset }: { onReset?: () => void }) {
     <div className="rounded-2xl border border-dashed border-zinc-300 bg-white py-16">
       <Empty
         description={
-          <div className="max-w-sm text-zinc-600">
+          <div className="text-zinc-600 flex flex-col items-center justify-center gap-2 text-center">
             <p className="font-medium text-zinc-900">No flights match your search</p>
             <p className="mt-1 text-sm">
               Try a different date, route, or loosen your filters.
