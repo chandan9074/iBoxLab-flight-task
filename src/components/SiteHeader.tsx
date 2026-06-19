@@ -10,7 +10,7 @@ export function SiteHeader() {
             <PlaneTakeoff className="h-5 w-5" />
           </span>
           <span className="text-lg font-semibold tracking-tight text-zinc-900">
-            SkyFare
+            iBoxSky
           </span>
         </Link>
         <nav className="flex items-center gap-5 text-sm font-medium text-zinc-600 sm:gap-6">

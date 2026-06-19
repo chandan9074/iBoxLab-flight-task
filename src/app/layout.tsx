@@ -35,8 +35,7 @@ export default function RootLayout({
             <div className="flex flex-1 flex-col">{children}</div>
             <footer className="border-t border-zinc-200 bg-white">
               <div className="mx-auto max-w-6xl px-4 py-6 text-sm text-zinc-500 sm:px-6">
-                SkyFare — a flight search aggregator demo. Mock data, no real
-                bookings.
+                iBoxSky — Fly your dream flights with us. All rights reserved.
               </div>
             </footer>
           </Providers>
