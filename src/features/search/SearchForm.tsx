@@ -81,7 +81,7 @@ export function SearchForm({ today, defaults }: SearchFormProps) {
       <Form
         form={form}
         layout="vertical"
-        requiredMark="optional"
+        // requiredMark="optional"
         onFinish={handleFinish}
         initialValues={{
           origin: defaults?.origin,
