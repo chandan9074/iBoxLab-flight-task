@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Button, Checkbox, Divider, Skeleton, Slider } from "antd";
 import type { Facets, FlightFilters } from "@/lib/types";
 import { CABIN_LABELS, formatPrice, formatStops } from "@/lib/format";
@@ -30,6 +31,18 @@ export function FiltersPanel({
   onFilterChange,
   onClear,
 }: FiltersPanelProps) {
+  // The committed "max price" filter (falls back to the upper bound when unset).
+  const committedMax = filters.maxPrice ?? facets?.priceMax;
+  // Local value so the thumb can move while dragging; committed on release.
+  const [sliderValue, setSliderValue] = useState(committedMax);
+  // Sync during render (instead of an effect) when the filter changes elsewhere
+  // — e.g. "Clear all" or a new search resets the committed value.
+  const [lastCommitted, setLastCommitted] = useState(committedMax);
+  if (committedMax !== lastCommitted) {
+    setLastCommitted(committedMax);
+    setSliderValue(committedMax);
+  }
+
   if (!facets) {
     return (
       <div className="rounded-2xl border border-zinc-200 bg-white p-5">
@@ -38,20 +51,18 @@ export function FiltersPanel({
     );
   }
 
-  const maxPrice = filters.maxPrice ?? facets.priceMax;
-
   return (
     <div className="rounded-2xl border border-zinc-200 bg-white p-5">
       <div className="flex items-center justify-between">
         <h2 className="text-base font-semibold text-zinc-900">Filters</h2>
         {activeFilterCount > 0 && (
-          <Button type="link" size="small" onClick={onClear} className="!px-0">
+          <Button type="link" size="small" onClick={onClear} className="px-0!">
             Clear all
           </Button>
         )}
       </div>
 
-      <Divider className="!my-4" />
+      <Divider className="my-4!" />
 
       <Section title="Airlines">
         <Checkbox.Group
@@ -72,7 +83,7 @@ export function FiltersPanel({
         />
       </Section>
 
-      <Divider className="!my-4" />
+      <Divider className="my-4!" />
 
       <Section title="Stops">
         <Checkbox.Group
@@ -86,7 +97,7 @@ export function FiltersPanel({
         />
       </Section>
 
-      <Divider className="!my-4" />
+      <Divider className="my-4!" />
 
       <Section title="Cabin">
         <Checkbox.Group
@@ -102,14 +113,15 @@ export function FiltersPanel({
         />
       </Section>
 
-      <Divider className="!my-4" />
+      <Divider className="my-4!" />
 
       <Section title="Max price">
         <Slider
           min={facets.priceMin}
           max={facets.priceMax}
-          value={maxPrice}
+          value={sliderValue}
           tooltip={{ formatter: (v) => formatPrice(v ?? 0) }}
+          onChange={(value) => setSliderValue(value as number)}
           onChangeComplete={(value) =>
             onFilterChange({
               maxPrice: value >= facets.priceMax ? undefined : value,
@@ -119,7 +131,7 @@ export function FiltersPanel({
         <div className="flex justify-between text-xs text-zinc-500">
           <span>{formatPrice(facets.priceMin)}</span>
           <span className="font-medium text-zinc-900">
-            Up to {formatPrice(maxPrice)}
+            Up to {formatPrice(sliderValue ?? facets.priceMax)}
           </span>
         </div>
       </Section>
